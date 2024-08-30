@@ -2,7 +2,7 @@ import React from "react";
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Alert } from "bootstrap";
+import { Alert } from 'react-bootstrap';
 import MovieCard from "../MovieCard/MovieCard";
 import "./PopularMovie.style.css"
 

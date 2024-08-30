@@ -12,3 +12,13 @@ export const usePopularMoviesQuery = () =>{
         select:(result)=>result.data
     })
 }
+
+export const useMoviesIdList = () =>{
+    return useQuery({
+        queryKey:['movie-id-list'],
+        queryFn:()=>{
+            return api.get(`/genre/movie/list`)
+        },
+        select:(genres)=>genres.data.genres
+    })
+}
