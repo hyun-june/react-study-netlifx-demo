@@ -26,3 +26,9 @@
 .banner-text-area > *{
     z-index: 2;
 }
+
+@media screen and (max-width:480px) {
+    .banner-text-area{
+        display: none;
+    }
+}

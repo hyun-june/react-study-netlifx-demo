@@ -17,11 +17,12 @@ const PopularMovie = () => {
           items: 2,
         },
         mobile: {
-          breakpoint: { max: 464, min: 0 },
+          breakpoint: { max: 480, min: 0 },
           items: 1,
         }
       };
   const {data, isLoading, isError, error} = usePopularMoviesQuery();
+  console.log(data)
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -30,7 +31,7 @@ const PopularMovie = () => {
   }
   return (
     <div>
-      <h3>Popular Movie</h3>
+      <h3 className="section-title">Popular Movie</h3>
       <Carousel
         infinite={true}
         centerMode={true}

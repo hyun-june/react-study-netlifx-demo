@@ -3,11 +3,12 @@ import { Badge } from 'react-bootstrap'
 import "./MovieCard.style.css"
 import { useMoviesIdList } from '../../../../hooks/usePopularMovies'
 import { Alert } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 const MovieCard = ({movie}) => {
 
   const {data:idList, isLoading, isError, error} = useMoviesIdList();
-  console.log("ID LIST",idList)
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -25,12 +26,13 @@ const MovieCard = ({movie}) => {
     <div className='movie-card' 
     style={{backgroundImage:"url("+`https://media.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`+")"}}>
         <div className='overlay'>
-            <h1>{movie.title}</h1>
-            {movie.genre_ids.map((id)=>(<Badge bg="danger">{findId(id)}</Badge>))}
-            <div>
-                <div>{movie.vote_average}</div>
-                <div>{movie.popularity}</div>
-                <div>{movie.adult?"over18": "under18"}</div>
+            <h1 className='card-title'>{movie.title}</h1>
+            <p className='card-p'>{movie.overview}</p>
+            <div className='genre-badge'>{movie.genre_ids.map((id)=>(<Badge bg="danger">{findId(id)}</Badge>))}</div>
+            <div className='sub-section'>
+                <div><FontAwesomeIcon icon={faStar} style={{color:"yellow"}}/>{movie.vote_average}</div>
+                {/* <div><FontAwesomeIcon icon={faUsers} />{movie.popularity}</div> */}
+                <div className={`age-badge ${movie.adult? "adult" : "children"}`}>{movie.adult?"18": "ALL"}</div>
             </div>
         </div>
     </div>

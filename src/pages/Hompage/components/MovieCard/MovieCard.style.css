@@ -6,6 +6,35 @@
     transition: 0.5s;
 }
 
+.card-title{
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.card-p{
+    font-size: 13px;
+    font-weight: 100;
+}
+
+.genre-badge{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 5px;
+    position: absolute;
+    bottom: 35px;
+}
+
+.sub-section{
+    position: absolute;
+    display: flex;
+    justify-content: space-around !important;
+    bottom: 0px;
+    width: 100%;
+    margin: 2px;
+}
+
 .overlay{
     width: 100%;
     height: 100%;
@@ -15,6 +44,8 @@
     color: white;
     font-weight: bold;
     overflow-wrap: break-word;
+    position: relative;
+    padding: 5px;
 }
 
 .overlay:hover{
@@ -24,4 +55,22 @@
 .movie-card:hover{
     transform: scale(1.3) translateZ(20px);
     z-index: 2;
+}
+
+.age-badge{
+    width: 28px;
+    height: 28px;
+    border-radius: 50px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.children{
+    background-color: green;
+}
+
+.adult{
+    background-color: red;
 }
