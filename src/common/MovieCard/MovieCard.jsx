@@ -1,7 +1,7 @@
 import React from 'react'
 import { Badge } from 'react-bootstrap'
 import "./MovieCard.style.css"
-import { useMoviesIdList } from '../../../../hooks/usePopularMovies'
+import { useMoviesIdList } from '../../hooks/useMoviesIdList'
 import { Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faUsers } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +10,16 @@ const MovieCard = ({movie}) => {
 
   const {data:idList, isLoading, isError, error} = useMoviesIdList();
 
+  const showGenre = (genreIdList)=>{
+    if(!idList) return [];
+    const genreNameList = genreIdList.map((id)=>{
+      const genreObj = idList.find((genre)=>genre.id === id)
+      return genreObj.name;
+    })
+
+    return genreNameList
+  }
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -17,10 +27,10 @@ const MovieCard = ({movie}) => {
     return <Alert variant="danger">{error.message}</Alert>;
   }
 
-  const findId = (id) => {
-    const genre = idList.find((genre) => genre.id === id);
-    return genre ? genre.name : 'Unknown';
-  };
+  // const findId = (id) => {
+  //   const genre = idList.find((genre) => genre.id === id);
+  //   return genre ? genre.name : 'Unknown';
+  // };
 
   return (
     <div className='movie-card' 
@@ -28,7 +38,7 @@ const MovieCard = ({movie}) => {
         <div className='overlay'>
             <h1 className='card-title'>{movie.title}</h1>
             <p className='card-p'>{movie.overview}</p>
-            <div className='genre-badge'>{movie.genre_ids.map((id)=>(<Badge bg="danger">{findId(id)}</Badge>))}</div>
+            <div className='genre-badge'>{showGenre(movie.genre_ids).map((id)=>(<Badge bg="danger">{id}</Badge>))}</div>
             <div className='sub-section'>
                 <div><FontAwesomeIcon icon={faStar} style={{color:"yellow"}}/>{movie.vote_average}</div>
                 {/* <div><FontAwesomeIcon icon={faUsers} />{movie.popularity}</div> */}

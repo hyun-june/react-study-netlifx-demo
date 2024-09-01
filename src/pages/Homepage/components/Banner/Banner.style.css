@@ -28,7 +28,18 @@
 }
 
 @media screen and (max-width:480px) {
-    .banner-text-area{
+
+    .banner-text-area {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+    }
+    .banner-text-area p{
         display: none;
+    }
+
+    .banner{
+        height: 40vh;
+        background-size: cover;
     }
 }
