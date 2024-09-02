@@ -1,0 +1,23 @@
+.review-box{
+    border: 2px dashed #8e8f97;
+    border-radius: 8px;
+    padding: 2em 2em;
+    color: white;
+    background: #5c5d61;
+    box-shadow: 0px 0px 0px 10px #5c5d61;
+    margin: 2rem 0rem;
+    overflow: hidden;
+}
+
+.review-content{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.review-date{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+}

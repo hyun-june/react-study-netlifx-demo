@@ -3,10 +3,10 @@ import "./MovieSlider.style.css"
 import Carousel from "react-multi-carousel";
 import MovieCard from "../MovieCard/MovieCard";
 
-const MovieSlider = ({title,movies,responsive}) => {
+const MovieSlider = ({title,movies,responsive, id}) => {
     
   return (
-    <div>
+    <div className='slide-container'>
         <h3 className="section-title">{title}</h3>
         <Carousel
             infinite={true}
@@ -15,7 +15,7 @@ const MovieSlider = ({title,movies,responsive}) => {
             containerClass="carousel-container"
             responsive={responsive}
         >
-            {movies.map((movie,index)=><MovieCard movie={movie} key={index}/>)}
+            {movies.map((movie,index)=><MovieCard movie={movie} key={index} />)}
         </Carousel>
     </div>
   )

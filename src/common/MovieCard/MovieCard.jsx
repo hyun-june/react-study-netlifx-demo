@@ -5,9 +5,10 @@ import { useMoviesIdList } from '../../hooks/useMoviesIdList'
 import { Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom';
 
 const MovieCard = ({movie}) => {
-
+  const navigate = useNavigate();
   const {data:idList, isLoading, isError, error} = useMoviesIdList();
 
   const showGenre = (genreIdList)=>{
@@ -27,18 +28,22 @@ const MovieCard = ({movie}) => {
     return <Alert variant="danger">{error.message}</Alert>;
   }
 
+  const moveToDetail = ()=>{
+    navigate(`/movies/${movie.id}`)
+  }
+
   // const findId = (id) => {
   //   const genre = idList.find((genre) => genre.id === id);
   //   return genre ? genre.name : 'Unknown';
   // };
 
   return (
-    <div className='movie-card' 
+    <div className='movie-card' onClick={moveToDetail}
     style={{backgroundImage:"url("+`https://media.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`+")"}}>
         <div className='overlay'>
             <h1 className='card-title'>{movie.title}</h1>
             <p className='card-p'>{movie.overview}</p>
-            <div className='genre-badge'>{showGenre(movie.genre_ids).map((id)=>(<Badge bg="danger">{id}</Badge>))}</div>
+            <div className='genre-badge'>{showGenre(movie.genre_ids).map((index)=>(<Badge bg="danger">{index}</Badge>))}</div>
             <div className='sub-section'>
                 <div><FontAwesomeIcon icon={faStar} style={{color:"yellow"}}/>{movie.vote_average}</div>
                 {/* <div><FontAwesomeIcon icon={faUsers} />{movie.popularity}</div> */}

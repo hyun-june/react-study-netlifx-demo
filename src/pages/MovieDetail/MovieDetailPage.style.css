@@ -1,0 +1,47 @@
+.detail-container{
+    padding-top: 2rem;
+    width: 80%;
+}
+.detail-section{
+    background-color: #5c5d61;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.detail-poster{
+    width: 300px;
+    height: 450px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.detail-tag{
+    animation: detail-tag 2s 0s ease infinite;
+    -moz-animation: detail-tag 2s 0s ease infinite;
+    /* Firefox */
+    -webkit-animation: detail-tag 2s 0s ease infinite;
+    /* Safari and Chrome */
+    -o-animation: detail-tag 2s 0s ease infinite;
+}
+
+@keyframes detail-tag {
+    0%,
+    100% {
+        text-shadow: 
+        -1px 0px 10px #FED128, -1.5px 0px 10px #FED128, -2px 0px 10px #FED128, 
+        -1px 0px 10px #F0130B, -2px 0px 10px #F0130B, -4px 0px 10px #F0130B,
+        -1px 0px 10px #F0130B, -2px 0px 10px #F0130B, -4px 0px 10px #F0130B, 2px 0px 10px #F0130B;
+          color: #FED128;
+        }
+        50% {
+        text-shadow: 
+        -1px 0px 10px #705C12, -1.5px 0px 10px #705C12, -2px 0px 10px #705C12, 
+        -1px 0px 10px #5C0704, -2px 0px 10px #5C0704, -4px 0px 10px #5C0704,
+        -1px 0px 10px #5C0704, -2px 0px 10px #5C0704, -4px 0px 10px #5C0704, 2px 0px 10px #5C0704;
+          color: #705C12;
+        }
+  }
+
+  .detail-title{
+    font-weight: bold;
+  }

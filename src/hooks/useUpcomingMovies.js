@@ -5,7 +5,7 @@ export const useUpcomingMoviesQuery = () =>{
     return useQuery({
         queryKey:['movie-upcoming'],
         queryFn:()=>{
-            return api.get(`/movie/upcoming`)
+            return api.get(`/movie/upcoming?language=ko`)
         },
         select:(result)=>result.data
     })

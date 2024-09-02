@@ -5,7 +5,7 @@ export const useTopRatedMoviesQuery = () =>{
     return useQuery({
         queryKey:['movie-topRated'],
         queryFn:()=>{
-            return api.get(`/movie/top_rated`)
+            return api.get(`/movie/top_rated?language=ko`)
         },
         select:(result)=>result.data
     })
