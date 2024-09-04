@@ -9,15 +9,11 @@
     overflow: hidden;
 }
 
-.review-content{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+
 
 .review-date{
     display: flex;
     justify-content: flex-end;
     padding-top: 1rem;
 }
+

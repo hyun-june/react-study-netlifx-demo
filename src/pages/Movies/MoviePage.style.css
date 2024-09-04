@@ -1,0 +1,35 @@
+.movie-badge {
+    margin: 10px;
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgrey !important;
+}
+
+.movie-badge:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    transform: scale(1.2);
+    background-color: rgb(185, 180, 180) !important;
+}
+
+.pagination-area{
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:480px) {
+    .badge-area{
+        display: none;
+    }
+    .movie-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

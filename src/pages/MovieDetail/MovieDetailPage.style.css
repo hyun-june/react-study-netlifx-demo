@@ -24,6 +24,7 @@
     -o-animation: detail-tag 2s 0s ease infinite;
 }
 
+
 @keyframes detail-tag {
     0%,
     100% {
@@ -44,4 +45,27 @@
 
   .detail-title{
     font-weight: bold;
+  }
+
+  .detail-genre{
+    margin: 10px 0px;
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+  }
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+  }
+  
+
+  .modal-body{
+    width: 800px;
+    height: 490px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }

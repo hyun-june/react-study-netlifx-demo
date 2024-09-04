@@ -3,7 +3,8 @@ import { useReviewData } from '../../hooks/useReviewData'
 import { useParams } from 'react-router-dom'
 import "./Review.style.css"
 import { Alert, Spinner } from 'react-bootstrap'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 const Review = () => {
     let {id} = useParams();
@@ -24,18 +25,26 @@ const Review = () => {
 
       return (
     <div>
-        {/* <div className='review-box'>
-            <div>{data?.results[0].author}</div>
-            <div>{data?.results[0].content}</div>
-            <div>{updatedAt}</div>
-        </div> */}
-
-        {topReview?.map((movie,index)=><div className='review-box'>
-            <h5>{movie.author}</h5>
-            <div className='review-content'>{movie.content}</div>
-            <div className='review-date'>{movie.updated_at.slice(0,10)}</div>
-        </div>)}
+        {topReview?.map((review,index)=>(
+          <ReviewItem key={index} review={review}/>
+        ))}
     </div>
+    )
+}
+
+const ReviewItem = ({ review }) => {
+  const [reviewMore, setReviewMore] = useState(false);
+  const text = reviewMore ? review.content : review.content.slice(0, 400);
+
+  return (
+      <div className='review-box'>
+          <h5>{review.author}</h5>
+          <div className='review-content'>{reviewMore ? `${text}` : `${text}...`}</div>
+          <div onClick={() => setReviewMore(!reviewMore)}>
+              {reviewMore ? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />}
+          </div>
+          <div className='review-date'>{review.updated_at.slice(0, 10)}</div>
+      </div>
   )
 }
 

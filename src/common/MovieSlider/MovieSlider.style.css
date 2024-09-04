@@ -6,8 +6,6 @@
 .section-title{
     position: relative;
     top: 30px;
+    padding-left: 20px;
 }
 
-.slide-container{
-    text-align: center;
-}

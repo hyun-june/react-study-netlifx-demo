@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie'
 import { useSearchParams } from 'react-router-dom';
-import { Alert, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { Alert, Badge, Col, Container, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import ReactPaginate from 'react-paginate';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { useMoviesIdList } from '../../hooks/useMoviesIdList';
+import "./MoviePage.style.css"
 
 // 경로 2가지
 // nav바에서 클릭해서 온경우 => nowplayingMovie 보여주기
@@ -16,53 +19,115 @@ import ReactPaginate from 'react-paginate';
 const MoviePage = () => {
   const [query,setQuery] = useSearchParams();
   const keyword = query.get("q");
-  const [page,setPage] =useState(1)
+  const [page,setPage] =useState(1);
+  const [selectFilter,setSelectFilter] = useState('default')
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const {data,isLoading,isError,error} = useSearchMovieQuery({keyword,page});
   console.log("111",data)
+  const {data:idData,isLoading:idisLoading,isError:idisError,error:iderror} = useMoviesIdList()
+  console.log(idData)
   const handlePageClick =({selected})=>{
     setPage(selected+1)
   }
 
-  if (isLoading) {
+  const dataSort = () =>{
+    if (!data || !data.results) return [];
+    let filterData = [...data.results]
+
+    if(selectFilter === 'popularity'){
+      return filterData.sort((a,b)=>b.popularity - a.popularity);
+    }
+    if(selectFilter === 'average'){
+      return filterData.sort((a,b)=> b.vote_average - a.vote_average);
+    }
+    
+    if(selectedValue) {
+      filterData = filterData.filter((movie)=>movie.genre_ids.includes(selectedValue))
+    }
+
+    return filterData
+  }
+
+  if (isLoading && idisLoading) {
     return <div>
       <Spinner animation='border' variant='danger' style={{width:"5rem",height:"5rem"}} />
     </div>;
     
   }
-  if (isError) {
+  if (isError && idisError) {
     return <Alert variant="danger">{error.message}</Alert>;
   }
+
+  const selectGenre = (id) =>{
+    setSelectedValue(id)
+  }
+
   return (
     <Container>
       <Row>
-        <Col lg={4} xs={12}>필터</Col>
-        <Col lg={8} xs={12}>
-          <Row>
-          {data?.results.map((movie,index)=><Col lg={4} xs={12} key={index}><MovieCard movie={movie} /></Col>)}
-          </Row>
-          <ReactPaginate
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={data?.total_pages} // 전체페이지
-            forcePage={page - 1}
-            previousLabel="< previous"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            breakLabel="..."
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
-            renderOnZeroPageCount={null}
-          />
+
+        <Col lg={3} xs={12}>
+        {/* <button onClick={()=>setSelectFilter('default')}>기본</button>
+        <button onClick={()=>setSelectFilter('popularity')}>인기순</button>
+        <button onClick={()=>setSelectFilter('average')}>평점순</button> */}
+        <Dropdown>
+        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              {selectFilter === 'default' ? '기본' : selectFilter === 'popularity' ? '인기순' : '평점순'}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+
+        {selectFilter !== 'default' && (
+                <Dropdown.Item onClick={() => setSelectFilter('default')}>
+                  기본
+                </Dropdown.Item>
+              )}
+              {selectFilter !== 'popularity' && (
+                <Dropdown.Item onClick={() => setSelectFilter('popularity')}>
+                  인기순
+                </Dropdown.Item>
+              )}
+              {selectFilter !== 'average' && (
+                <Dropdown.Item onClick={() => setSelectFilter('average')}>
+                  평점순
+                </Dropdown.Item>
+              )}
+        </Dropdown.Menu>
+      </Dropdown>
+        <div className='badge-area'>{idData.map((item)=>(<Badge className='movie-badge'onClick={()=>selectGenre(item.id)} >{item.name}</Badge>))}</div>
         </Col>
+        <Col lg={9} xs={12}>
+          <Row>
+          {dataSort().map((movie,index)=><Col className='movie-section' lg={3} xs={12} key={index}><MovieCard movie={movie} /></Col>)}
+          </Row>
+        </Col>
+        <div className='pagination-area'>
+          {data?.total_pages > 1 && (
+              <ReactPaginate
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={data?.total_pages}
+                forcePage={page - 1}
+                previousLabel="< previous"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+
+              />
+            )}
+        </div>
       </Row>
     </Container>
   )
