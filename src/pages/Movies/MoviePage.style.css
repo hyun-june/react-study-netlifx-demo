@@ -1,21 +1,24 @@
-.movie-badge {
+.genre-badge-btn{
     margin: 10px;
     width: 120px;
     height: 30px;
     font-size: 15px;
+    font-weight: bold;
+    color: black;
     white-space: nowrap;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: lightgrey !important;
+    background-color: lightgrey;
+    border-radius: 5px;
 }
 
-.movie-badge:hover{
+.genre-badge-btn:hover{
     cursor: pointer;
     transition: 0.5s;
     transform: scale(1.2);
-    background-color: rgb(185, 180, 180) !important;
+    background-color: rgb(160, 160, 160) ;
 }
 
 .pagination-area{

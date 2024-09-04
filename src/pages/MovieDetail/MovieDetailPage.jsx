@@ -47,7 +47,7 @@ const MovieDetail = () => {
           </Col>
           <Col lg={8} xs={12}>
             <h3 className="detail-tag">{data?.tagline}</h3>
-            <div className="detail-genre">{data.genres.map((movie)=>(<Badge bg="danger">{movie.name}</Badge>))}</div>
+            <div className="detail-genre">{data?.genres.map((movie)=>(<Badge bg="danger">{movie.name}</Badge>))}</div>
             <h2 className="detail-title">{data?.title}</h2>
             <h4>개요</h4>
             <p>{data?.overview}</p>

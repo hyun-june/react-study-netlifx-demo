@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import "./MoviePage.style.css"
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie'
 import { useSearchParams } from 'react-router-dom';
-import { Alert, Badge, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { Alert, Col, Container, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import ReactPaginate from 'react-paginate';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useMoviesIdList } from '../../hooks/useMoviesIdList';
-import "./MoviePage.style.css"
 
 // 경로 2가지
 // nav바에서 클릭해서 온경우 => nowplayingMovie 보여주기
@@ -95,7 +95,7 @@ const MoviePage = () => {
               )}
         </Dropdown.Menu>
       </Dropdown>
-        <div className='badge-area'>{idData.map((item)=>(<Badge className='movie-badge'onClick={()=>selectGenre(item.id)} >{item.name}</Badge>))}</div>
+        <div className='badge-area'>{idData.map((item)=>(<div className='genre-badge-btn' onClick={()=>selectGenre(item.id)} >{item.name}</div>))}</div>
         </Col>
         <Col lg={9} xs={12}>
           <Row>
