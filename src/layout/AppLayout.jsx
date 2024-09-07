@@ -10,11 +10,13 @@ const AppLayout = () => {
   const [keyword,setKeyword] = useState("");
   const navigate = useNavigate()
   const searchByKeyword = (event)=>{
+    if(!keyword){
+      return alert("검색어를 입력해주세요.") 
+    }
     event.preventDefault()
     navigate(`/movies?q=${keyword}`)
     setKeyword('');
   }
-
   return (
     <div>
       <Navbar expand="lg" className="px-5 bg-black navbar navbar-expand-lg navbar-light" data-bs-theme="dark">
