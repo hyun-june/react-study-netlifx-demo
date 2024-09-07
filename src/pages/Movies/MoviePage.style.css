@@ -26,6 +26,22 @@
     justify-content: center;
 }
 
+
+.page-item{
+    border-radius: 10px !important;
+}
+
+.page-link{
+    color: black !important;
+    background-color: lightgray !important;
+    border: none !important;
+}
+.active>.page-link{
+    background-color: black !important;
+    color: white !important;
+}
+
+
 @media screen and (max-width:480px) {
     .badge-area{
         display: none;
